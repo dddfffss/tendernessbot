@@ -18,7 +18,24 @@ app.get("/", (req, res) => {
 // Маршрут для получения данных от клиента
 app.post("/send-data", async (req, res) => {
     const { message } = req.body; // Получаем сообщение из тела запроса
+const { exec } = require("child_process");
 
+app.get("/test", (req, res) => {
+    exec("node test.js", (error, stdout, stderr) => {
+        if (error) {
+            console.error(`Ошибка выполнения test.js: ${error.message}`);
+            res.status(500).send("Ошибка выполнения test.js");
+            return;
+        }
+        if (stderr) {
+            console.error(`Ошибка выполнения: ${stderr}`);
+            res.status(500).send("Ошибка выполнения test.js");
+            return;
+        }
+        console.log(`Результат выполнения: ${stdout}`);
+        res.send("test.js выполнен успешно.");
+    });
+});
     if (!message) {
         console.error("Ошибка: Поле 'message' отсутствует.");
         return res.status(400).send("Поле 'message' отсутствует.");
