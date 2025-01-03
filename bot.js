@@ -3,8 +3,8 @@ const axios = require("axios");
 
 const app = express();
 
-const botToken = "ВАШ_ТОКЕН"; // Укажите токен Telegram-бота
-const chatId = "ВАШ_CHAT_ID"; // Укажите ID чата
+const botToken = "7822839883:AAGpnct2WADp29i4_u5s_txMAoeDxKBSPtc"; // Укажите токен Telegram-бота
+const chatId = "1080261812"; // Укажите ID чата
 
 // Middleware для обработки JSON
 app.use(express.json());
