@@ -10,10 +10,6 @@ const botToken = "7822839883:AAGpnct2WADp29i4_u5s_txMAoeDxKBSPtc";
 const chatId = "1080261812";
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-    console.log(`Сервер запущен на порту ${PORT}`);
-});
-
 
 // Middleware для обработки JSON
 app.use(express.json());
@@ -35,7 +31,7 @@ app.post("/send-data", async (req, res) => {
 });
 
 // Запуск сервера
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Сервер запущен на порту ${PORT}`);
 });
