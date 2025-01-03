@@ -2,7 +2,9 @@ const express = require("express");
 const axios = require("axios");
 
 const app = express();
-
+app.get("/", (req, res) => {
+    res.send("Сервер работает! Telegram-бот запущен 🚀");
+});
 // Замените на токен вашего Telegram-бота
 const botToken = "7822839883:AAGpnct2WADp29i4_u5s_txMAoeDxKBSPtc";
 
