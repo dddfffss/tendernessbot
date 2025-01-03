@@ -8,8 +8,6 @@ const botToken = "7822839883:AAGpnct2WADp29i4_u5s_txMAoeDxKBSPtc";
 
 // Укажите ваш Telegram chat ID
 const chatId = "1080261812";
-const PORT = process.env.PORT || 3000;
-
 
 // Middleware для обработки JSON
 app.use(express.json());
