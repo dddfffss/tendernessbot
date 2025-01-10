@@ -1,7 +1,8 @@
+
 const axios = require('axios');
 
 // Указание токена бота
-const botToken = '7822839883:AAGpnct2WADp29i4_u5s_txMAoeDxKBSPtc';
+const botToken = '7822839883:AAG3g2Qkmieq-UVEb0HOJ7x-1_WTGp9zyng';
 
 // Указание ID чата
 const chatId = '1080261812';
@@ -19,6 +20,6 @@ const sendMessage = async (message) => {
     }
 };
 
-// Отправляем тестовое сообщение
-sendMessage('Привет! Это тестовое сообщение от Telegram бота.');
-
+// Отправка сообщения с кнопок
+module.exports = sendMessage;
+    
