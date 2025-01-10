@@ -1,60 +1,28 @@
-const express = require("express");
-const axios = require("axios");
+const express = require('express');
+const axios = require('axios');
 
 const app = express();
 
-const botToken = "7822839883:AAGpnct2WADp29i4_u5s_txMAoeDxKBSPtc"; // Укажите токен Telegram-бота
-const chatId = "1080261812"; // Укажите ID чата
-
-// Middleware для обработки JSON
-app.use(express.json());
-
-// Маршрут для проверки работы сервера
-app.get("/", (req, res) => {
-    console.log("GET запрос к /");
-    res.send("Сервер работает! Telegram-бот запущен 🚀");
-});
-
-// Маршрут для получения данных от клиента
-app.post("/send-data", async (req, res) => {
-    const { message } = req.body; // Получаем сообщение из тела запроса
-const { exec } = require("child_process");
-
-app.get("/test", (req, res) => {
-    exec("node test.js", (error, stdout, stderr) => {
-        if (error) {
-            console.error(`Ошибка выполнения test.js: ${error.message}`);
-            res.status(500).send("Ошибка выполнения test.js");
-            return;
-        }
-        if (stderr) {
-            console.error(`Ошибка выполнения: ${stderr}`);
-            res.status(500).send("Ошибка выполнения test.js");
-            return;
-        }
-        console.log(`Результат выполнения: ${stdout}`);
-        res.send("test.js выполнен успешно.");
-    });
-});
-    if (!message) {
-        console.error("Ошибка: Поле 'message' отсутствует.");
-        return res.status(400).send("Поле 'message' отсутствует.");
-    }
-
-    console.log("Получено сообщение:", message);
+// Функция для отправки сообщения
+const sendMessage = async (message) => {
+    const botToken = process.env.BOT_TOKEN; // Получаем токен из переменных окружения
+    const chatId = process.env.CHAT_ID; // Получаем chat_id из переменных окружения
 
     try {
-        // Отправка сообщения в Telegram
         const response = await axios.post(`https://api.telegram.org/bot${botToken}/sendMessage`, {
             chat_id: chatId,
             text: message,
         });
-        console.log("Ответ от Telegram API:", response.data);
-        res.send("Сообщение отправлено в Telegram.");
+        console.log('Сообщение успешно отправлено:', response.data);
     } catch (error) {
-        console.error("Ошибка при отправке сообщения в Telegram:", error.response?.data || error.message);
-        res.status(500).send("Ошибка при отправке сообщения.");
+        console.error('Ошибка при отправке сообщения:', error.response ? error.response.data : error.message);
     }
+};
+
+// Роут для обработки запроса и отправки сообщения
+app.get('/test', async (req, res) => {
+    await sendMessage('Кто-то зашёл на сайт! 🎉'); // Отправляем сообщение
+    res.send('Сообщение отправлено в Telegram!');
 });
 
 // Запуск сервера
