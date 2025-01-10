@@ -4,6 +4,14 @@ const bodyParser = require('body-parser');
 const sendMessage = require('./test.js');
 
 const app = express();
+app.get('/sendMessage', async (req, res) => {
+    const message = req.query.message || 'Тестовое сообщение!'; // Получение текста сообщения из параметра ?message=
+    await sendMessage(message); // Отправляем сообщение в Telegram
+    res.send('Сообщение отправлено!');
+});
+
+});
+
 app.use(bodyParser.json());
 
 app.post('/sendMessage', async (req, res) => {
